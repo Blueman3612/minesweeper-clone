@@ -5,7 +5,7 @@
 Next.js 16 (App Router), React 19, TypeScript, Tailwind v4. Package manager: npm.
 
 ## Commands
-- `npm run dev` starts the dev server. E2E and the Browser pane use port 3111 (`.claude/launch.json`).
+- `npm run dev` starts the dev server. E2E uses port 3111. The Browser pane launch config (`.claude/launch.json`, `npm run dev -- --port 3111`) is machine-local: the whole `.claude/` directory is gitignored, so recreate it on a fresh clone.
 - `npm run typecheck` and `npm run lint` must both be clean before a commit.
 - `npm run test:unit` runs Vitest over `tests/unit`. `npm run test:e2e` runs Playwright over `tests/e2e`, starting or reusing the dev server on 3111. `npm test` runs both.
 

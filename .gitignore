@@ -49,5 +49,5 @@ next-env.d.ts
 # autonomous run logs stay local
 /runs/
 
-# machine-local claude settings
-.claude/settings.local.json
+# machine-local agent config (launch.json, settings.local.json)
+/.claude/
