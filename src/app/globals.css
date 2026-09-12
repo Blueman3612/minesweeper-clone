@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0e1015;
+  --color-surface: #161a22;
+  --color-surface-2: #1d222d;
+  --color-line: #2a3140;
+  --color-line-strong: #3a4356;
+  --color-ink: #e6e9f0;
+  --color-ink-muted: #8b94a7;
+  --color-accent: #f6b73c;
+  --color-accent-hover: #ffc961;
+  --color-danger: #e5484d;
+  --color-led: #ff3b3b;
+
+  --color-n1: #5b9dff;
+  --color-n2: #43d17a;
+  --color-n3: #ff6b6b;
+  --color-n4: #b191ff;
+  --color-n5: #f08a5d;
+  --color-n6: #3ed6c5;
+  --color-n7: #f2f4f8;
+  --color-n8: #9aa3b5;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 50% -200px, #1a2030 0%, transparent 60%),
+    var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Raised bevel, the classic Minesweeper button look. */
+.bevel-up {
+  background: var(--color-surface-2);
+  box-shadow:
+    inset 2px 2px 0 var(--color-line-strong),
+    inset -2px -2px 0 #0b0e14;
+}
+
+/* Sunken bevel for wells that hold the counters and the field. */
+.bevel-down {
+  box-shadow:
+    inset 2px 2px 0 #0b0e14,
+    inset -2px -2px 0 var(--color-line-strong);
+}
+
+.frame {
+  background: var(--color-surface-2);
+  border: 3px solid;
+  border-color: var(--color-line-strong) #0b0e14 #0b0e14 var(--color-line-strong);
+}
+
+.led {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--color-led);
+  background: #070709;
+  text-shadow: 0 0 8px rgba(255, 59, 59, 0.55);
+  letter-spacing: 0.08em;
+  box-shadow: inset 1px 1px 0 #000, inset -1px -1px 0 #2a2f3a;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cell);
+  height: var(--cell);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: calc(var(--cell) * 0.56);
+  line-height: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  padding: 0;
+  border: 0;
+  color: var(--color-ink);
+}
+
+.cell-hidden {
+  background: #2b3242;
+  box-shadow:
+    inset 2px 2px 0 #4a546a,
+    inset -2px -2px 0 #141821;
+  cursor: pointer;
+}
+.cell-hidden:hover {
+  background: #343c4f;
+}
+.cell-hidden:active,
+.cell-hidden.is-pressed {
+  background: #1a1f2a;
+  box-shadow: inset 1px 1px 0 #0b0e14;
+}
+.cell-done {
+  cursor: default;
+}
+.cell-done:hover {
+  background: #2b3242;
+}
+
+.cell-revealed {
+  background: #12151c;
+  box-shadow: inset 0 0 0 1px #1c212b;
+  cursor: default;
+}
+
+.cell-exploded {
+  background: #c0392b;
+  box-shadow: inset 0 0 0 1px #7a1f16;
+}
+
+.cell-wrong::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  background:
+    linear-gradient(45deg, transparent 44%, var(--color-danger) 44%, var(--color-danger) 56%, transparent 56%),
+    linear-gradient(-45deg, transparent 44%, var(--color-danger) 44%, var(--color-danger) 56%, transparent 56%);
+}
+
+.cell-question {
+  color: var(--color-accent);
+}
+
+.n1 { color: var(--color-n1); }
+.n2 { color: var(--color-n2); }
+.n3 { color: var(--color-n3); }
+.n4 { color: var(--color-n4); }
+.n5 { color: var(--color-n5); }
+.n6 { color: var(--color-n6); }
+.n7 { color: var(--color-n7); }
+.n8 { color: var(--color-n8); }
+
+/* Field preview on the difficulty cards: a grid drawn with gradients, one square per cell. */
+.field-preview {
+  background-color: #2b3242;
+  background-image:
+    linear-gradient(to right, #4a546a 1px, transparent 1px),
+    linear-gradient(to bottom, #4a546a 1px, transparent 1px);
+  background-size: calc(100% / var(--cols)) calc(100% / var(--rows));
+  box-shadow: inset 0 0 0 1px #4a546a;
+}
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 1.75rem;
+  padding: 0 0.5rem;
+  border-radius: 0.375rem;
+  background: var(--color-surface-2);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow:
+    inset 0 -2px 0 #0b0e14,
+    inset 0 1px 0 var(--color-line-strong),
+    0 0 0 1px var(--color-line);
+}
