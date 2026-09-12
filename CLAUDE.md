@@ -14,6 +14,7 @@ Next.js 16 (App Router), React 19, TypeScript, Tailwind v4. Package manager: npm
 - `src/lib/bestTimes.ts` persists best times in localStorage under `minesweeper:bestTimes` as milliseconds per difficulty. It takes a `StorageLike` so tests run without a DOM.
 - `src/lib/format.ts` formats durations and the three-digit LED readouts.
 - `src/components/menu/` is the main menu (difficulty cards, field manual). `src/components/game/` is the game screen (`Game` owns state, `Board` and `Cell` are memoized, `Clock` isolates timer ticks). `src/components/ui/icons.tsx` holds inline SVG icons.
+- `runs/` holds autonomous run logs. It is gitignored and stays local, so a kickoff must not commit the log here.
 - Routes: `/` menu, `/play?difficulty=<beginner|intermediate|expert>&seed=<uint32>`. The seed is optional and exists for deterministic tests; without it every round draws a fresh random seed.
 
 ## Rules
